@@ -1,6 +1,6 @@
 package edu.hm.hafner.analysis;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static edu.hm.hafner.analysis.assertj.Assertions.*;
 import static edu.hm.hafner.analysis.assertj.SoftAssertions.*;
@@ -10,7 +10,7 @@ import static edu.hm.hafner.analysis.assertj.SoftAssertions.*;
  *
  * @author Marcel Binder
  */
-class IssueTest {
+public class IssueTest {
     static final String FILE_NAME = "C:/users/tester/file-name";
     static final String FILE_NAME_WITH_BACKSLASHES = "C:\\users\\tester/file-name";
     static final int LINE_START = 1;
@@ -30,7 +30,7 @@ class IssueTest {
     static final String FINGERPRINT = "fingerprint";
 
     @Test
-    void testIssue() {
+    public void testIssue() {
         Issue issue = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
         assertSoftly(softly -> {
@@ -52,14 +52,14 @@ class IssueTest {
     }
 
     @Test
-    void testDefaultIssueNullStringsNegativeIntegers() {
+    public void testDefaultIssueNullStringsNegativeIntegers() {
         Issue issue = new Issue(null, 0, 0, 0, 0, null, null, null, PRIORITY, null, null);
 
         assertIsDefaultIssue(issue);
     }
 
     @Test
-    void testDefaultIssueEmptyStringsNegativeIntegers() {
+    public void testDefaultIssueEmptyStringsNegativeIntegers() {
         Issue issue = new Issue(EMPTY, -1, -1, -1, -1, EMPTY, EMPTY, EMPTY, PRIORITY, EMPTY, EMPTY);
 
         assertIsDefaultIssue(issue);
@@ -84,7 +84,7 @@ class IssueTest {
     }
 
     @Test
-    void testZeroLineColumnEndsDefaultToLineColumnStarts() {
+    public void testZeroLineColumnEndsDefaultToLineColumnStarts() {
         Issue issue = new Issue(FILE_NAME, LINE_START, 0, COLUMN_START, 0, CATEGORY, TYPE, PACKAGE_NAME, null, MESSAGE, DESCRIPTION);
 
         assertSoftly(softly -> {
@@ -97,14 +97,14 @@ class IssueTest {
     }
 
     @Test
-    void testNullPriorityDefaultsToNormal() {
+    public void testNullPriorityDefaultsToNormal() {
         Issue issue = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, null, MESSAGE, DESCRIPTION);
 
         assertThat(issue.getPriority()).isEqualTo(Priority.NORMAL);
     }
 
     @Test
-    void testIdRandomlyGenerated() {
+    public void testIdRandomlyGenerated() {
         Issue issue1 = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
         Issue issue2 = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
@@ -112,7 +112,7 @@ class IssueTest {
     }
 
     @Test
-    void testFingerprint() {
+    public void testFingerprint() {
         Issue issue = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
         issue.setFingerprint(FINGERPRINT);
@@ -121,7 +121,7 @@ class IssueTest {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
         Issue issue = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
         assertSoftly(softly -> {
@@ -135,14 +135,14 @@ class IssueTest {
     }
 
     @Test
-    void testFileNameBackslashConversion() {
+    public void testFileNameBackslashConversion() {
         Issue issue = new Issue(FILE_NAME_WITH_BACKSLASHES, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
         assertThat(issue).hasFileName(FILE_NAME);
     }
 
     @Test
-    void testMessageDescriptionStripped() {
+    public void testMessageDescriptionStripped() {
         Issue issue = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE_NOT_STRIPPED, DESCRIPTION_NOT_STRIPPED);
 
         assertSoftly(softly -> {

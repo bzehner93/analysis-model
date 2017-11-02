@@ -2,11 +2,11 @@ package edu.hm.hafner.analysis.parser;
 
 import java.io.IOException;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import edu.hm.hafner.analysis.Issues;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 /**
  * Tests the class {@link MavenConsoleParser}.
@@ -48,7 +48,7 @@ public class MavenConsoleParserTest extends ParserTester {
      * @see <a href="http://issues.jenkins-ci.org/browse/JENKINS-25278">Issue 25278</a>
      */
     @Test
-    @Disabled("Until JENKINS-25278 is fixed")
+    @Ignore("Until JENKINS-25278 is fixed")
     public void largeFile() throws IOException {
         Issues warnings = new MavenConsoleParser().parse(openFile("maven-large.log"));
 
