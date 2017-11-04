@@ -10,19 +10,19 @@ import static edu.hm.hafner.analysis.assertj.IssueAssert.*;
  *
  * @author Marcel Binder
  */
-class IssueBuilderTest {
+public class IssueBuilderTest {
     private static final Issue DEFAULT_ISSUE = new Issue(null, 0, 0, 0, 0, null, null, null, null, null, null);
     private static final Issue FILLED_ISSUE = new Issue(FILE_NAME, LINE_START, LINE_END, COLUMN_START, COLUMN_END, CATEGORY, TYPE, PACKAGE_NAME, PRIORITY, MESSAGE, DESCRIPTION);
 
     @Test
-    void testDefaultValues() {
+    public void testDefaultValues() {
         Issue issue = new IssueBuilder().build();
 
         assertThat(issue).isEqualTo(DEFAULT_ISSUE);
     }
 
     @Test
-    void testFilledIssue() {
+    public void testFilledIssue() {
         Issue issue = new IssueBuilder()
                 .setFileName(FILE_NAME)
                 .setLineStart(LINE_START)
@@ -41,7 +41,7 @@ class IssueBuilderTest {
     }
 
     @Test
-    void testCopy() {
+    public void testCopy() {
         Issue copy = new IssueBuilder()
                 .copy(FILLED_ISSUE)
                 .build();
@@ -51,7 +51,7 @@ class IssueBuilderTest {
     }
 
     @Test
-    void testBuildNewInstance() {
+    public void testBuildNewInstance() {
         IssueBuilder builder = new IssueBuilder().copy(FILLED_ISSUE);
         Issue issue1 = builder.build();
         Issue issue2 = builder.build();
